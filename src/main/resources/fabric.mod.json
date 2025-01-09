@@ -2,16 +2,15 @@
 	"schemaVersion": 1,
 	"id": "useless-stuff",
 	"version": "${version}",
-	"name": "useless-stuff",
-	"description": "This is an example description! Tell everyone what your mod is about!",
+	"name": "Useless Stuff",
+	"description": "Some useless stuff",
 	"authors": [
-		"Me!"
+		"Goose"
 	],
 	"contact": {
-		"homepage": "https://fabricmc.net/",
-		"sources": "https://github.com/FabricMC/fabric-example-mod"
+		"sources": "https://github.com/CharmedGoose/Useless-Stuff"
 	},
-	"license": "CC0-1.0",
+	"license": "MIT",
 	"icon": "assets/useless-stuff/icon.png",
 	"environment": "*",
 	"entrypoints": {
@@ -37,8 +36,5 @@
 		"minecraft": "~1.21.4",
 		"java": ">=21",
 		"fabric-api": "*"
-	},
-	"suggests": {
-		"another-mod": "*"
 	}
 }
