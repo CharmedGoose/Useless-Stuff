@@ -1,6 +1,6 @@
 {
   "model": {
     "type": "minecraft:model",
-    "model": "useless-stuff:item/trash"
+    "model": "useless-stuff:block/compactor"
   }
 }

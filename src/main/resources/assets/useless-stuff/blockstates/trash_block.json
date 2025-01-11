@@ -1,0 +1,7 @@
+{
+  "variants": {
+    "": {
+      "model": "useless-stuff:block/trash_block"
+    }
+  }
+}
