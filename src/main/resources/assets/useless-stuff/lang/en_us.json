@@ -1,5 +1,6 @@
 {
   "item.useless-stuff.trash": "Trash",
   "block.useless-stuff.trash_block": "Block of Trash",
-  "block.useless-stuff.compactor": "Compactor"
+  "block.useless-stuff.compactor": "Compactor",
+  "itemgroup.useless-stuff": "Useless Stuff"
 }

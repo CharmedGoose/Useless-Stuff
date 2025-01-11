@@ -23,7 +23,6 @@ public class ModBlocks {
 
     public static final Block COMPACTOR = registerBlock("compactor", new Block(AbstractBlock.Settings.create().registryKey(RegistryKey.of(RegistryKeys.BLOCK, Identifier.of(UselessStuff.MOD_ID, "compactor")))
             .strength(5f)
-            .requiresTool()
             .sounds(BlockSoundGroup.STONE)
     ));
 
