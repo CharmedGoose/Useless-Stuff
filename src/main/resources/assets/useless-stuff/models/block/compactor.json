@@ -1,6 +1,82 @@
 {
-  "parent": "minecraft:block/cube_all",
+  "credit": "Made with Blockbench",
+  "parent": "minecraft:block/block",
   "textures": {
-    "all": "useless-stuff:block/compactor"
-  }
+    "0": "useless-stuff:block/compactor_side",
+    "1": "useless-stuff:block/compactor_bottom",
+    "2": "useless-stuff:block/head",
+    "particle": "useless-stuff:block/compactor_side"
+  },
+  "elements": [
+    {
+      "name": "Body",
+      "from": [
+        0,
+        0,
+        0
+      ],
+      "to": [
+        16,
+        16,
+        16
+      ],
+      "faces": {
+        "north": {
+          "uv": [
+            0,
+            0,
+            16,
+            16
+          ],
+          "texture": "#0"
+        },
+        "east": {
+          "uv": [
+            0,
+            0,
+            16,
+            16
+          ],
+          "texture": "#0"
+        },
+        "south": {
+          "uv": [
+            0,
+            0,
+            16,
+            16
+          ],
+          "texture": "#0"
+        },
+        "west": {
+          "uv": [
+            0,
+            0,
+            16,
+            16
+          ],
+          "texture": "#0"
+        },
+        "up": {
+          "uv": [
+            0,
+            0,
+            16,
+            16
+          ],
+          "texture": "#2"
+        },
+        "down": {
+          "uv": [
+            0,
+            0,
+            16,
+            16
+          ],
+          "texture": "#1"
+        }
+      }
+    }
+  ],
+  "display": {}
 }

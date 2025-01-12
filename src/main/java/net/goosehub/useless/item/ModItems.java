@@ -16,11 +16,11 @@ import java.util.ArrayList;
 
 public class ModItems {
 
-    public static final Item TRASH = registerItem("trash", new TrashItem(new Item.Settings().registryKey(RegistryKey.of(RegistryKeys.ITEM, Identifier.of(UselessStuff.MOD_ID, "trash")))
-                    .component(ModDataComponentTypes.ITEMS, new ArrayList<>())
-                    .maxCount(1)
-            )
-    );
+    public static final Item TRASH = registerItem("trash", new TrashItem(new Item.Settings()
+            .registryKey(RegistryKey.of(RegistryKeys.ITEM, Identifier.of(UselessStuff.MOD_ID, "trash")))
+            .component(ModDataComponentTypes.ITEMS, new ArrayList<>())
+            .maxCount(1)
+    ));
 
     public static Item registerItem(String name, Item item) {
         return Registry.register(Registries.ITEM, Identifier.of(UselessStuff.MOD_ID, name), item);

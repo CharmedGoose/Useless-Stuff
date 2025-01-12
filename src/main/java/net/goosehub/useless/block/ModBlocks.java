@@ -2,6 +2,7 @@ package net.goosehub.useless.block;
 
 import net.fabricmc.fabric.api.itemgroup.v1.ItemGroupEvents;
 import net.goosehub.useless.UselessStuff;
+import net.goosehub.useless.block.custom.CompactorBlock;
 import net.minecraft.block.AbstractBlock;
 import net.minecraft.block.Block;
 import net.minecraft.item.BlockItem;
@@ -16,12 +17,14 @@ import net.minecraft.util.Identifier;
 
 public class ModBlocks {
 
-    public static final Block TRASH_BLOCK = registerBlock("trash_block", new Block(AbstractBlock.Settings.create().registryKey(RegistryKey.of(RegistryKeys.BLOCK, Identifier.of(UselessStuff.MOD_ID, "trash_block")))
+    public static final Block TRASH_BLOCK = registerBlock("trash_block", new Block(AbstractBlock.Settings.create()
+            .registryKey(RegistryKey.of(RegistryKeys.BLOCK, Identifier.of(UselessStuff.MOD_ID, "trash_block")))
             .breakInstantly()
             .sounds(BlockSoundGroup.CROP)
     ));
 
-    public static final Block COMPACTOR = registerBlock("compactor", new Block(AbstractBlock.Settings.create().registryKey(RegistryKey.of(RegistryKeys.BLOCK, Identifier.of(UselessStuff.MOD_ID, "compactor")))
+    public static final Block COMPACTOR = registerBlock("compactor", new CompactorBlock(AbstractBlock.Settings.create()
+            .registryKey(RegistryKey.of(RegistryKeys.BLOCK, Identifier.of(UselessStuff.MOD_ID, "compactor")))
             .strength(5f)
             .sounds(BlockSoundGroup.STONE)
     ));

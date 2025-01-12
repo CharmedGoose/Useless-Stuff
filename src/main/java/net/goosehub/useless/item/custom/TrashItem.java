@@ -1,6 +1,5 @@
 package net.goosehub.useless.item.custom;
 
-import net.goosehub.useless.UselessStuff;
 import net.goosehub.useless.component.ModDataComponentTypes;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.item.Item;
@@ -12,6 +11,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class TrashItem extends Item {
+
     public TrashItem(Settings settings) {
         super(settings);
     }
@@ -31,7 +31,7 @@ public class TrashItem extends Item {
 
                 stack.decrement(1);
 
-                UselessStuff.LOGGER.info("Dropped Items From Trash Item");
+                return true;
             }
         }
 
