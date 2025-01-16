@@ -10,6 +10,8 @@ import net.minecraft.entity.ItemEntity;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.item.ItemStack;
 import net.minecraft.predicate.entity.EntityPredicates;
+import net.minecraft.sound.SoundCategory;
+import net.minecraft.sound.SoundEvents;
 import net.minecraft.text.Text;
 import net.minecraft.util.ActionResult;
 import net.minecraft.util.hit.BlockHitResult;
@@ -28,26 +30,30 @@ public class CompactorBlock extends Block {
 
     @Override
     protected ActionResult onUse(BlockState state, World world, BlockPos pos, PlayerEntity player, BlockHitResult hit) {
-        if (world.isClient) return ActionResult.SUCCESS;
+        world.playSound(player, pos, SoundEvents.BLOCK_PISTON_EXTEND, SoundCategory.BLOCKS, 1f, 1f);
 
-        Box area = new Box(pos.getX(), pos.getY() + 1, pos.getZ(), pos.getX() + 1, pos.getY() + 2, pos.getZ() + 1);
-        List<ItemEntity> items = world.getEntitiesByType(EntityType.ITEM, area, EntityPredicates.VALID_ENTITY);
+        if (!world.isClient) {
+            Box area = new Box(pos.getX(), pos.getY() + 1, pos.getZ(), pos.getX() + 1, pos.getY() + 2, pos.getZ() + 1);
+            List<ItemEntity> items = world.getEntitiesByType(EntityType.ITEM, area, EntityPredicates.VALID_ENTITY);
 
-        if (items.isEmpty()) return ActionResult.SUCCESS;
+            if (!items.isEmpty()) {
+                List<ItemStack> itemStacks = items.stream()
+                        .map(ItemEntity::getStack)
+                        .collect(Collectors.toList());
 
-        List<ItemStack> itemStacks = items.stream()
-                .map(ItemEntity::getStack)
-                .collect(Collectors.toList());
+                ItemStack trash = new ItemStack(ModItems.TRASH);
+                trash.set(ModDataComponentTypes.ITEMS, itemStacks);
 
-        ItemStack trash = new ItemStack(ModItems.TRASH);
-        trash.set(ModDataComponentTypes.ITEMS, itemStacks);
+                for (ItemEntity item : items) {
+                    item.remove(Entity.RemovalReason.KILLED);
+                }
 
-        for (ItemEntity item : items) {
-            item.remove(Entity.RemovalReason.KILLED);
+                world.spawnEntity(new ItemEntity(world, pos.getX(), pos.getY() + 1, pos.getZ(), trash));
+                player.sendMessage(Text.literal("Compacted: " + getStackNames(itemStacks)), true);
+            }
         }
 
-        world.spawnEntity(new ItemEntity(world, pos.getX(), pos.getY() + 1, pos.getZ(), trash));
-        player.sendMessage(Text.literal("Compacted: " + getStackNames(itemStacks)), true);
+        world.playSound(player, pos, SoundEvents.BLOCK_PISTON_CONTRACT, SoundCategory.BLOCKS, 1f, 1f);
 
         return ActionResult.SUCCESS;
     }
