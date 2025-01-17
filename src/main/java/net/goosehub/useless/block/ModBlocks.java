@@ -8,12 +8,17 @@ import net.minecraft.block.Block;
 import net.minecraft.item.BlockItem;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemGroups;
+import net.minecraft.item.ItemStack;
+import net.minecraft.item.tooltip.TooltipType;
 import net.minecraft.registry.Registries;
 import net.minecraft.registry.Registry;
 import net.minecraft.registry.RegistryKey;
 import net.minecraft.registry.RegistryKeys;
 import net.minecraft.sound.BlockSoundGroup;
+import net.minecraft.text.Text;
 import net.minecraft.util.Identifier;
+
+import java.util.List;
 
 public class ModBlocks {
 
@@ -21,7 +26,13 @@ public class ModBlocks {
             .registryKey(RegistryKey.of(RegistryKeys.BLOCK, Identifier.of(UselessStuff.MOD_ID, "trash_block")))
             .breakInstantly()
             .sounds(BlockSoundGroup.CROP)
-    ));
+    ) {
+        @Override
+        public void appendTooltip(ItemStack stack, Item.TooltipContext context, List<Text> tooltip, TooltipType options) {
+            tooltip.add(Text.translatable("tooltip.useless-stuff.trash_block"));
+            super.appendTooltip(stack, context, tooltip, options);
+        }
+    });
 
     public static final Block COMPACTOR = registerBlock("compactor", new CompactorBlock(AbstractBlock.Settings.create()
             .registryKey(RegistryKey.of(RegistryKeys.BLOCK, Identifier.of(UselessStuff.MOD_ID, "compactor")))

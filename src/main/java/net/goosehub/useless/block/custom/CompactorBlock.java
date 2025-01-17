@@ -8,7 +8,9 @@ import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityType;
 import net.minecraft.entity.ItemEntity;
 import net.minecraft.entity.player.PlayerEntity;
+import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
+import net.minecraft.item.tooltip.TooltipType;
 import net.minecraft.predicate.entity.EntityPredicates;
 import net.minecraft.sound.SoundCategory;
 import net.minecraft.sound.SoundEvents;
@@ -61,7 +63,16 @@ public class CompactorBlock extends Block {
     private String getStackNames(List<ItemStack> itemStacks) {
         return itemStacks.stream()
                 .map(item ->
-                        item.getCount() + " " + item.getItemName().getString() + ((item.getCount() > 1) ? "s" : ""))
+                {
+                    String itemName = item.getItem().getName().getString();
+                    return item.getCount() + " " + itemName + ((item.getCount() > 1) && !itemName.endsWith("s") ? "s" : "");
+                })
                 .collect(Collectors.joining(", "));
+    }
+
+    @Override
+    public void appendTooltip(ItemStack stack, Item.TooltipContext context, List<Text> tooltip, TooltipType options) {
+        tooltip.add(Text.translatable("tooltip.useless-stuff.compactor"));
+        super.appendTooltip(stack, context, tooltip, options);
     }
 }

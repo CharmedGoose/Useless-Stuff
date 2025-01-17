@@ -2,5 +2,9 @@
   "item.useless-stuff.trash": "Trash",
   "block.useless-stuff.trash_block": "Block of Trash",
   "block.useless-stuff.compactor": "Compactor",
-  "itemgroup.useless-stuff": "Useless Stuff"
+  "itemgroup.useless-stuff": "Useless Stuff",
+  "tooltip.useless-stuff.trash.1": "I wonder what's inside... hmm...",
+  "tooltip.useless-stuff.trash.2": "Open it I dare you",
+  "tooltip.useless-stuff.trash_block": "It's just trash but in block form",
+  "tooltip.useless-stuff.compactor": "It compacts!"
 }
