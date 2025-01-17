@@ -1,10 +1,10 @@
 {
-  "item.useless-stuff.trash": "Trash",
-  "block.useless-stuff.trash_block": "Block of Trash",
   "block.useless-stuff.compactor": "Compactor",
+  "block.useless-stuff.trash_block": "Block of Trash",
+  "item.useless-stuff.trash": "Trash",
   "itemgroup.useless-stuff": "Useless Stuff",
+  "tooltip.useless-stuff.compactor": "It compacts!",
   "tooltip.useless-stuff.trash.1": "I wonder what's inside... hmm...",
   "tooltip.useless-stuff.trash.2": "Open it I dare you",
-  "tooltip.useless-stuff.trash_block": "It's just trash but in block form",
-  "tooltip.useless-stuff.compactor": "It compacts!"
+  "tooltip.useless-stuff.trash_block": "It's just trash but in block form"
 }
