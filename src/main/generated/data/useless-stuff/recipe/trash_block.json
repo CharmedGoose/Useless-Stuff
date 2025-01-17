@@ -1,0 +1,19 @@
+{
+  "type": "minecraft:crafting_shapeless",
+  "category": "building",
+  "ingredients": [
+    "useless-stuff:trash",
+    "useless-stuff:trash",
+    "useless-stuff:trash",
+    "useless-stuff:trash",
+    "useless-stuff:trash",
+    "useless-stuff:trash",
+    "useless-stuff:trash",
+    "useless-stuff:trash",
+    "useless-stuff:trash"
+  ],
+  "result": {
+    "count": 1,
+    "id": "useless-stuff:trash_block"
+  }
+}

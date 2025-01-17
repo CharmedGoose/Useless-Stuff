@@ -7,7 +7,7 @@
     "X": "minecraft:iron_ingot"
   },
   "pattern": [
-    "XXX",
+    "###",
     "#X#",
     "#R#"
   ],
