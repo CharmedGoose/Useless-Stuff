@@ -4,9 +4,7 @@ import net.fabricmc.fabric.api.client.datagen.v1.provider.FabricModelProvider;
 import net.fabricmc.fabric.api.datagen.v1.FabricDataOutput;
 import net.goosehub.useless.block.ModBlocks;
 import net.goosehub.useless.item.ModItems;
-import net.minecraft.client.data.BlockStateModelGenerator;
-import net.minecraft.client.data.ItemModelGenerator;
-import net.minecraft.client.data.Models;
+import net.minecraft.client.data.*;
 
 public class ModModelProvider extends FabricModelProvider {
     public ModModelProvider(FabricDataOutput output) {
@@ -17,7 +15,7 @@ public class ModModelProvider extends FabricModelProvider {
     public void generateBlockStateModels(BlockStateModelGenerator blockStateModelGenerator) {
         blockStateModelGenerator.registerSimpleCubeAll(ModBlocks.TRASH_BLOCK);
 
-        blockStateModelGenerator.registerSimpleState(ModBlocks.COMPACTOR);
+        blockStateModelGenerator.registerNorthDefaultHorizontalRotation(ModBlocks.COMPACTOR);
     }
 
     @Override

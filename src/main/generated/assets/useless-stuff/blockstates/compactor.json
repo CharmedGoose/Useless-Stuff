@@ -1,7 +1,19 @@
 {
   "variants": {
-    "": {
+    "facing=east": {
+      "model": "useless-stuff:block/compactor",
+      "y": 90
+    },
+    "facing=north": {
       "model": "useless-stuff:block/compactor"
+    },
+    "facing=south": {
+      "model": "useless-stuff:block/compactor",
+      "y": 180
+    },
+    "facing=west": {
+      "model": "useless-stuff:block/compactor",
+      "y": 270
     }
   }
 }
