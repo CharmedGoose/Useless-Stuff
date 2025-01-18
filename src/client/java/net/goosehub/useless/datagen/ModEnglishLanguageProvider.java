@@ -25,5 +25,10 @@ public class ModEnglishLanguageProvider extends FabricLanguageProvider {
         translationBuilder.add("tooltip.useless-stuff.trash.2", "Open it I dare you");
         translationBuilder.add("tooltip.useless-stuff.trash_block", "It's just trash but in block form");
         translationBuilder.add("tooltip.useless-stuff.compactor", "It compacts!");
+
+        translationBuilder.add("message.useless-stuff.compactor", "Compacted: %1$s");
+        translationBuilder.add("message.useless-stuff.compactor.remove", "Removed: %1$s");
+        translationBuilder.add("message.useless-stuff.compactor.add", "Added: %1$s");
+        translationBuilder.add("message.useless-stuff.compactor.empty", "Compactor is empty");
     }
 }

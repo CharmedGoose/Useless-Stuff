@@ -1,6 +1,7 @@
 package net.goosehub.useless.item.custom;
 
 import net.goosehub.useless.component.ModDataComponentTypes;
+import net.minecraft.entity.ItemEntity;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
@@ -27,10 +28,9 @@ public class TrashItem extends Item {
                 for (ItemStack item : items) {
                     boolean wasAdded = player.getInventory().insertStack(item);
                     if (!wasAdded) {
-                        player.dropItem(item, false);
+                        player.getWorld().spawnEntity(new ItemEntity(player.getWorld(), player.getX(), player.getY(), player.getZ(), item));
                     }
                 }
-
                 stack.decrement(1);
 
                 return true;

@@ -1,37 +1,33 @@
 package net.goosehub.useless.block.custom;
 
 import com.mojang.serialization.MapCodec;
+import net.goosehub.useless.block.entity.CompactorBlockEntity;
 import net.goosehub.useless.component.ModDataComponentTypes;
 import net.goosehub.useless.item.ModItems;
-import net.minecraft.block.Block;
-import net.minecraft.block.BlockState;
-import net.minecraft.block.FacingBlock;
-import net.minecraft.entity.Entity;
-import net.minecraft.entity.EntityType;
+import net.minecraft.block.*;
+import net.minecraft.block.entity.BlockEntity;
 import net.minecraft.entity.ItemEntity;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemPlacementContext;
 import net.minecraft.item.ItemStack;
 import net.minecraft.item.tooltip.TooltipType;
-import net.minecraft.predicate.entity.EntityPredicates;
-import net.minecraft.sound.SoundCategory;
-import net.minecraft.sound.SoundEvents;
 import net.minecraft.state.StateManager;
 import net.minecraft.state.property.Properties;
 import net.minecraft.text.Text;
 import net.minecraft.util.ActionResult;
+import net.minecraft.util.Hand;
 import net.minecraft.util.hit.BlockHitResult;
 import net.minecraft.util.math.BlockPos;
-import net.minecraft.util.math.Box;
 import net.minecraft.util.math.Direction;
 import net.minecraft.world.World;
+import org.jetbrains.annotations.Nullable;
 
 import java.util.List;
 import java.util.Objects;
 import java.util.stream.Collectors;
 
-public class CompactorBlock extends FacingBlock {
+public class CompactorBlock extends FacingBlock implements BlockEntityProvider {
 
     public static final MapCodec<CompactorBlock> CODEC = Block.createCodec(CompactorBlock::new);
 
@@ -46,33 +42,80 @@ public class CompactorBlock extends FacingBlock {
     }
 
     @Override
-    protected ActionResult onUse(BlockState state, World world, BlockPos pos, PlayerEntity player, BlockHitResult hit) {
-        world.playSound(player, pos, SoundEvents.BLOCK_PISTON_EXTEND, SoundCategory.BLOCKS, 1f, 1f);
+    public @Nullable BlockEntity createBlockEntity(BlockPos pos, BlockState state) {
+        return new CompactorBlockEntity(pos, state);
+    }
 
+    @Override
+    protected ActionResult onUseWithItem(ItemStack stack, BlockState state, World world, BlockPos pos, PlayerEntity player, Hand hand, BlockHitResult hit) {
         if (!world.isClient) {
-            Box area = new Box(pos.getX(), pos.getY() + 1, pos.getZ(), pos.getX() + 1, pos.getY() + 2, pos.getZ() + 1);
-            List<ItemEntity> items = world.getEntitiesByType(EntityType.ITEM, area, EntityPredicates.VALID_ENTITY);
+            BlockEntity blockEntity = world.getBlockEntity(pos);
 
-            if (!items.isEmpty()) {
-                List<ItemStack> itemStacks = items.stream()
-                        .map(ItemEntity::getStack)
-                        .collect(Collectors.toList());
+            if (blockEntity instanceof CompactorBlockEntity compactorBlockEntity) {
+                if (stack.isEmpty()) {
+                    List<ItemStack> items = compactorBlockEntity.getItems();
 
-                ItemStack trash = new ItemStack(ModItems.TRASH);
-                trash.set(ModDataComponentTypes.ITEMS, itemStacks);
+                    if (!items.isEmpty()) {
+                        ItemStack trash = new ItemStack(ModItems.TRASH);
+                        trash.set(ModDataComponentTypes.ITEMS, items);
 
-                for (ItemEntity item : items) {
-                    item.remove(Entity.RemovalReason.KILLED);
+                        world.spawnEntity(new ItemEntity(world, pos.getX(), pos.getY() + 1, pos.getZ(), trash));
+                        compactorBlockEntity.clearItems();
+
+                        player.sendMessage(Text.translatable("message.useless-stuff.compactor", getStackNames(items)), true);
+                    } else {
+                        player.sendMessage(Text.translatable("message.useless-stuff.compactor.empty"), true);
+                    }
+                } else {
+                    compactorBlockEntity.addItem(stack.copy());
+                    player.setStackInHand(hand, ItemStack.EMPTY);
+                    player.sendMessage(Text.translatable("message.useless-stuff.compactor.add", (stack.getCount() + " " + stack.getName().getString())), true);
                 }
-
-                world.spawnEntity(new ItemEntity(world, pos.getX(), pos.getY() + 1, pos.getZ(), trash));
-                player.sendMessage(Text.literal("Compacted: " + getStackNames(itemStacks)), true);
             }
         }
 
-        world.playSound(player, pos, SoundEvents.BLOCK_PISTON_CONTRACT, SoundCategory.BLOCKS, 1f, 1f);
-
         return ActionResult.SUCCESS;
+    }
+
+    @Override
+    protected void onBlockBreakStart(BlockState state, World world, BlockPos pos, PlayerEntity player) {
+        if (!world.isClient()) {
+            BlockEntity blockEntity = world.getBlockEntity(pos);
+
+            if (blockEntity instanceof CompactorBlockEntity compactorBlockEntity) {
+                List<ItemStack> items = compactorBlockEntity.getItems();
+
+                if (!items.isEmpty()) {
+                    ItemStack lastItem = items.getLast();
+
+                    world.spawnEntity(new ItemEntity(world, pos.getX(), pos.getY() + 1, pos.getZ(), lastItem));
+                    compactorBlockEntity.removeLast();
+
+                    player.sendMessage(Text.translatable("message.useless-stuff.compactor.remove", (lastItem.getCount() + " " + lastItem.getName().getString())), true);
+                }
+            }
+        }
+
+        super.onBlockBreakStart(state, world, pos, player);
+    }
+
+    @Override
+    protected void onStateReplaced(BlockState state, World world, BlockPos pos, BlockState newState, boolean moved) {
+        if (!state.isOf(newState.getBlock())) {
+            BlockEntity blockEntity = world.getBlockEntity(pos);
+
+            if (blockEntity instanceof CompactorBlockEntity compactorBlockEntity) {
+                List<ItemStack> items = compactorBlockEntity.getItems();
+
+                if (!items.isEmpty()) {
+                    for (ItemStack item : items) {
+                        world.spawnEntity(new ItemEntity(world, pos.getX(), pos.getY(), pos.getZ(), item));
+                    }
+                }
+            }
+        }
+
+        super.onStateReplaced(state, world, pos, newState, moved);
     }
 
     private String getStackNames(List<ItemStack> itemStacks) {

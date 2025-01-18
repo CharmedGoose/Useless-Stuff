@@ -4,6 +4,7 @@ import net.fabricmc.api.ModInitializer;
 
 import net.fabricmc.fabric.api.registry.FuelRegistryEvents;
 import net.goosehub.useless.block.ModBlocks;
+import net.goosehub.useless.block.entity.ModBlockEntities;
 import net.goosehub.useless.component.ModDataComponentTypes;
 import net.goosehub.useless.item.ModItemGroups;
 import net.goosehub.useless.item.ModItems;
@@ -22,10 +23,11 @@ public class UselessStuff implements ModInitializer {
         ModItems.registerModItems();
         ModBlocks.registerModBlocks();
 
+        ModBlockEntities.registerBlockEntities();
+        ModDataComponentTypes.registerDataComponentTypes();
+
         FuelRegistryEvents.BUILD.register((builder, context) -> {
             builder.add(ModItems.TRASH, 120 * 20);
         });
-
-        ModDataComponentTypes.registerDataComponentTypes();
     }
 }
