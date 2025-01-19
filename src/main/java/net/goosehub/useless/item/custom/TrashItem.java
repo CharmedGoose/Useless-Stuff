@@ -26,8 +26,8 @@ public class TrashItem extends Item {
 
             if (!items.isEmpty()) {
                 for (ItemStack item : items) {
-                    boolean wasAdded = player.getInventory().insertStack(item);
-                    if (!wasAdded) {
+                    player.getInventory().insertStack(item);
+                    if (!player.getInventory().contains(item)) {
                         player.getWorld().spawnEntity(new ItemEntity(player.getWorld(), player.getX(), player.getY(), player.getZ(), item));
                     }
                 }

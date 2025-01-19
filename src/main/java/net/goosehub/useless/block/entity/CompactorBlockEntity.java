@@ -5,12 +5,15 @@ import net.minecraft.block.entity.BlockEntity;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NbtCompound;
 import net.minecraft.nbt.NbtList;
+import net.minecraft.network.listener.ClientPlayPacketListener;
+import net.minecraft.network.packet.Packet;
+import net.minecraft.network.packet.s2c.play.BlockEntityUpdateS2CPacket;
 import net.minecraft.registry.RegistryWrapper;
 import net.minecraft.util.math.BlockPos;
+import org.jetbrains.annotations.Nullable;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Optional;
 
 public class CompactorBlockEntity extends BlockEntity {
 
@@ -37,6 +40,14 @@ public class CompactorBlockEntity extends BlockEntity {
     public void clearItems() {
         items = new ArrayList<>();
         markDirty();
+    }
+
+    @Override
+    public void markDirty() {
+        if (world != null) {
+            world.updateListeners(pos, getCachedState(), getCachedState(), 3);
+        }
+        super.markDirty();
     }
 
     @Override
@@ -72,5 +83,15 @@ public class CompactorBlockEntity extends BlockEntity {
         }
 
         super.readNbt(nbt, registryLookup);
+    }
+
+    @Override
+    public @Nullable Packet<ClientPlayPacketListener> toUpdatePacket() {
+        return BlockEntityUpdateS2CPacket.create(this);
+    }
+
+    @Override
+    public NbtCompound toInitialChunkDataNbt(RegistryWrapper.WrapperLookup registries) {
+        return createNbt(registries);
     }
 }
