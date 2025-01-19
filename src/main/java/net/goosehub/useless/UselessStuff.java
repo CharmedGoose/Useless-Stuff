@@ -28,6 +28,7 @@ public class UselessStuff implements ModInitializer {
 
         FuelRegistryEvents.BUILD.register((builder, context) -> {
             builder.add(ModItems.TRASH, 120 * 20);
+            builder.add(ModBlocks.TRASH_BLOCK, 1200 * 20);
         });
     }
 }
