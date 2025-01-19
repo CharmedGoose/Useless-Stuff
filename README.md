@@ -49,6 +49,18 @@ Lasts 2400 ticks.
 
 ## Screenshots
 
+![Compactor Showcase](https://raw.githubusercontent.com/CharmedGoose/Useless-Stuff/refs/heads/main/assets/images/compactor_showcase.png)
+![Trash Showcase](https://raw.githubusercontent.com/CharmedGoose/Useless-Stuff/refs/heads/main/assets/images/trash_showcase.png)
+![Trash Block Showcase](https://raw.githubusercontent.com/CharmedGoose/Useless-Stuff/refs/heads/main/assets/images/wall_of_trash.png)
+![Trash Furnace Showcase](https://raw.githubusercontent.com/CharmedGoose/Useless-Stuff/refs/heads/main/assets/images/trash_furnace_showcase.png)
+![Trash Block Furnace Showcase](https://raw.githubusercontent.com/CharmedGoose/Useless-Stuff/refs/heads/main/assets/images/trash_block_furnace_showcase.png)
+
+<details>
+    <summary>Bonus Screenshot</summary>
+
+![Bonus](https://raw.githubusercontent.com/CharmedGoose/Useless-Stuff/refs/heads/main/assets/images/bonus.png)
+</details>
+
 ## Tutorial Used
 
 [Fabric Modding Tutorials for Minecraft 1.21.X](https://youtube.com/playlist?list=PLKGarocXCE1H_HxOYihQMq0mlpqiUJj4L)
