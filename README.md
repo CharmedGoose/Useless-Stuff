@@ -10,7 +10,7 @@ Some useless stuff for Minecraft 1.21.4.
 
 ![Compactor Recipe](https://raw.githubusercontent.com/CharmedGoose/Useless-Stuff/refs/heads/main/assets/images/compactor_recipe.png)
 
-### Use
+### Info
 
 Compacts any block into trash.
 
@@ -26,7 +26,7 @@ Left-click to remove the block/item in the compactor.
 
 ![Trash Block Recipe](https://raw.githubusercontent.com/CharmedGoose/Useless-Stuff/refs/heads/main/assets/images/trash_block_recipe.png)
 
-### Use
+### Info
 
 A block of trash that can be used as fuel.
 Lasts 10x as long as trash.
@@ -39,7 +39,7 @@ Lasts 10x as long as trash.
 
 Put any item/block in compactor and compact it.
 
-### Use
+### Info
 
 Select and right-click it to open it and the items will appear in your inventory.  
 Items cannot be added to the trash item.
@@ -47,9 +47,9 @@ Items cannot be added to the trash item.
 Can be used as fuel.
 Lasts 2400 ticks.
 
-## Credits
+## Screenshots
 
-### Tutorial Used
+## Tutorial Used
 
 [Fabric Modding Tutorials for Minecraft 1.21.X](https://youtube.com/playlist?list=PLKGarocXCE1H_HxOYihQMq0mlpqiUJj4L)
 

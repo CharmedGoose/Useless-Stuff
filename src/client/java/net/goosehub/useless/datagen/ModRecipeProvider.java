@@ -29,7 +29,7 @@ public class ModRecipeProvider extends FabricRecipeProvider {
                         .offerTo(exporter);
 
                 createShaped(RecipeCategory.REDSTONE, ModBlocks.COMPACTOR, 1)
-                        .pattern("XXX")
+                        .pattern("###")
                         .pattern("#X#")
                         .pattern("#R#")
                         .input('#', Items.COBBLESTONE)
