@@ -1,3 +1,5 @@
+![Items Showcase](https://raw.githubusercontent.com/CharmedGoose/Useless-Stuff/refs/heads/main/assets/images/items_showcase.png)
+
 # Useless Stuff
 
 Some useless stuff for Minecraft 1.21.4.
