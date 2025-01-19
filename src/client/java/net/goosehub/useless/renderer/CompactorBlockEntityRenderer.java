@@ -79,13 +79,7 @@ public class CompactorBlockEntityRenderer implements BlockEntityRenderer<Compact
 
     private int getLightLevel(World world, BlockPos pos, Direction direction) {
 
-        // also not AI
-        switch (direction) {
-            case SOUTH -> pos = pos.south();
-            case WEST -> pos = pos.west();
-            case EAST -> pos = pos.east();
-            default -> pos = pos.north();
-        }
+        pos = pos.offset(direction);
 
         int bLight = world.getLightLevel(LightType.BLOCK, pos);
         int sLight = world.getLightLevel(LightType.SKY, pos);

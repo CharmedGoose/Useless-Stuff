@@ -59,7 +59,9 @@ public class CompactorBlock extends FacingBlock implements BlockEntityProvider {
                         ItemStack trash = new ItemStack(ModItems.TRASH);
                         trash.set(ModDataComponentTypes.ITEMS, items);
 
-                        world.spawnEntity(new ItemEntity(world, pos.getX(), pos.getY() + 1, pos.getZ(), trash));
+                        BlockPos spawnPos = getSpawnPos(pos, state.get(Properties.HORIZONTAL_FACING));
+
+                        world.spawnEntity(new ItemEntity(world, spawnPos.getX(), spawnPos.getY(), spawnPos.getZ(), trash));
                         compactorBlockEntity.clearItems();
 
                         player.sendMessage(Text.translatable("message.useless-stuff.compactor", getStackNames(items)), true);
@@ -87,8 +89,9 @@ public class CompactorBlock extends FacingBlock implements BlockEntityProvider {
 
                 if (!items.isEmpty()) {
                     ItemStack lastItem = items.getLast();
+                    BlockPos spawnPos = getSpawnPos(pos, state.get(Properties.HORIZONTAL_FACING));
 
-                    world.spawnEntity(new ItemEntity(world, pos.getX(), pos.getY() + 1, pos.getZ(), lastItem));
+                    world.spawnEntity(new ItemEntity(world, spawnPos.getX(), spawnPos.getY(), spawnPos.getZ(), lastItem));
                     compactorBlockEntity.removeLast();
 
                     player.sendMessage(Text.translatable("message.useless-stuff.compactor.remove", (lastItem.getCount() + " " + lastItem.getName().getString())), true);
@@ -126,6 +129,10 @@ public class CompactorBlock extends FacingBlock implements BlockEntityProvider {
                     return item.getCount() + " " + itemName + ((item.getCount() > 1) && !itemName.endsWith("s") ? "s" : "");
                 })
                 .collect(Collectors.joining(", "));
+    }
+
+    private BlockPos getSpawnPos(BlockPos pos, Direction direction) {
+        return pos.offset(direction);
     }
 
     @Override
