@@ -12,6 +12,8 @@ import net.minecraft.item.Item;
 import net.minecraft.item.ItemPlacementContext;
 import net.minecraft.item.ItemStack;
 import net.minecraft.item.tooltip.TooltipType;
+import net.minecraft.sound.SoundCategory;
+import net.minecraft.sound.SoundEvents;
 import net.minecraft.state.StateManager;
 import net.minecraft.state.property.Properties;
 import net.minecraft.text.Text;
@@ -56,6 +58,8 @@ public class CompactorBlock extends FacingBlock implements BlockEntityProvider {
                     List<ItemStack> items = compactorBlockEntity.getItems();
 
                     if (!items.isEmpty()) {
+                        world.playSound(null, pos, SoundEvents.BLOCK_PISTON_EXTEND, SoundCategory.BLOCKS, 1.0F, 1.0F);
+
                         ItemStack trash = new ItemStack(ModItems.TRASH);
                         trash.set(ModDataComponentTypes.ITEMS, items);
 
@@ -65,6 +69,7 @@ public class CompactorBlock extends FacingBlock implements BlockEntityProvider {
                         compactorBlockEntity.clearItems();
 
                         player.sendMessage(Text.translatable("message.useless-stuff.compactor", getStackNames(items)), true);
+                        world.playSound(null, pos, SoundEvents.BLOCK_PISTON_CONTRACT, SoundCategory.BLOCKS, 1.0F, 1.0F);
                     } else {
                         player.sendMessage(Text.translatable("message.useless-stuff.compactor.empty"), true);
                     }
