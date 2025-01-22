@@ -4,6 +4,8 @@
 
 Some useless stuff for Minecraft 1.21.4.
 
+https://github.com/user-attachments/assets/9480f2a1-cc20-41ba-8bb3-5618905f5eed
+
 ## Compactor
 
 ![Compactor Block](https://raw.githubusercontent.com/CharmedGoose/Useless-Stuff/refs/heads/main/assets/images/compactor.png)
